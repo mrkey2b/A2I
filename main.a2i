@@ -1,0 +1,11 @@
+start service_mysql
+start service_last-Update
+start service_[system]/main.exe
+
+# Micrologiciel
+
+start lpa_banque/[connect{service_mysql'API'}:4861]
+start lpa_stand/[ip:connect{service_last-Update;[system:main.exe]:1677}]
+start cartouche/[connect{service_[system]:4861}]
+start liknPUB/[connect{service_[system]:4861}];[[connect{service_mysql'API'}:4861]]
+start logusers_console(axia:ip)/[start_system]Update_main.a2i/{$users}/#/main.exe
